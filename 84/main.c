@@ -14,12 +14,13 @@ char OPS[] = {'*', '/', '+', '-', '^', '^'};
 int main(int argc, char **argv)
 {
         char argvbuf[256] = {0};
+        char original_expr[256] = {0};
         char curexpr[32] = {0};
         int i = 1, res = 0, exprstart;
         for (i = 1; i < argc; ++i) {
                 strcat(argvbuf, argv[i]);
+                strcpy(original_expr, argvbuf);
         }
-        printf("%s\n", argvbuf);
         while ((exprstart = scan_next_expr(argvbuf, curexpr)) != -1) {
                 int lhs = 0, rhs = 0, nullidx = 0;
                 char op = 0;
@@ -29,9 +30,9 @@ int main(int argc, char **argv)
                 nullidx = sprintf(&argvbuf[exprstart], "%i", res);
                 argvbuf[exprstart + nullidx] = ' ';
                 remove_whitespace(argvbuf);
-                printf("%s\n", argvbuf);
                 memset(curexpr, 0, 32);
         }
+        printf("%s = %s\n", original_expr, argvbuf);
         return 0;
 }
 
