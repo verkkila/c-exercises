@@ -9,7 +9,7 @@ int eval(const int a, const char e, const int b);
 int scan_next_expr(const char *buf, char *expr);
 void remove_whitespace(char *str);
 
-char OPS[4] = {'*', '/', '+', '-'};
+char OPS[] = {'*', '/', '+', '-', '^', '^'};
 
 int main(int argc, char **argv)
 {
@@ -90,7 +90,7 @@ int scan_next_expr(const char *buf, char *expr)
                 }
                 i = 0;
                 i_op += 2;
-                if (i_op > 3)
+                if (i_op > 5)
                         break;
         }
         return -1;
