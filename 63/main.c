@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "vector.h"
 
+notdone
+
 int main(void)
 {
         vector test;
