@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-char *strcpy(char *dest, char *src);
-char *strcat(char *dest, char *src);
+char *strcpy(char *dest, const char *src);
+char *strcat(char *dest, const char *src);
 
 int main(void)
 {
@@ -17,24 +17,25 @@ int main(void)
         return 0;
 }
 
-char *strcpy(char *dest, char *src)
+char *strcpy(char *dest, const char *src)
 {
-        size_t i = 0;
+        unsigned int i = 0;
         do {
                 dest[i] = src[i];
         } while (src[i++]);
         return dest;
 }
 
-char *strcat(char *dest, char *src)
+char *strcat(char *dest, const char *src)
 {
-        size_t i = 0, j = 0;
+        unsigned int i = 0, j = 0;
         while (dest[i]) {
                 ++i;
         }
         do {
                 dest[i] = src[j];
                 ++i;
-        } while (src[++j]);
+                ++j;
+        } while (src[j]);
         return dest;
 }

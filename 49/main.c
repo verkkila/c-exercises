@@ -4,6 +4,8 @@
 #include "read_input.h"
 
 
+notdone
+
 void create_lottery_row(int *arr, int n);
 
 int main(void)
