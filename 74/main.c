@@ -7,8 +7,9 @@ int main(void)
         int luku = 5;
         int tulos = 0;
         tulos = TUPLAA(luku++);
-        /* tulos = 5 + (5 + 1)
-         * tulos = 11*/
-        printf("%i\n", tulos);
+        /* ((5++) + (5++))
+         * tulos = 6 + 5++
+         * tulos = 11 ja luku = 7 */
+        printf("tulos: %i luku: %i\n", tulos, luku);
         return 0;
 }
