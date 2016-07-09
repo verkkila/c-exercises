@@ -3,20 +3,20 @@
 
 int main(void)
 {
-        int num = 0,
-            iter = 0;
-        char number[6] = {'\0'};
+        int num, i;
+        char number[8];
+
         while (1) {
-                char input_buffer[32] = {'\0'};
+                char in_buf[16];
                 printf("Syötä viisinumeroinen kokonaisluku: ");        
-                fgets(input_buffer, 64, stdin);
-                num = strtol(input_buffer, NULL, 10);
+                fgets(in_buf, 16, stdin);
+                num = strtol(in_buf, NULL, 10);
                 if (num > 9999 && num < 100000)
                         break;
         }
         sprintf(number, "%i", num);
-        while (number[iter]) {
-                printf("%c ", number[iter++]);
+        for (i = 0; number[i]; ++i) {
+                printf("%c ", number[i]);
         }
         return 0;
 }

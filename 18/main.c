@@ -3,16 +3,19 @@
 
 int main(void)
 {
-        int ctr = 0;
-        float val = 0.f,
-              sum = 0.f;
+        int n;
+        float val, sum;
+
+        val = 0.f;
+        sum = 0.f;
+        n = 0;
         while (val >= 0.f) {
                 read_float("Syötä positiivinen reaaliluku (lopeta negatiivisella): ", &val);
                 if (val > 0.f) {
                         sum += val;
-                        ctr++;
+                        n++;
                 }
         }
-        printf("Lukujen keskiarvo: %.2f", (sum / ctr));
+        printf("Lukujen keskiarvo: %.2f", (sum / n));
         return 0;
 }

@@ -2,9 +2,10 @@
 
 int main(void)
 {       
-        int i = 0;
-        char buf[10] = {0};
-        for (; i < 8; ++i) {
+        int i;
+        char buf[16] = {0};
+
+        for (i = 0; i < 8; ++i) {
                buf[i] = 'a';
                printf("%s\n", buf);
         }

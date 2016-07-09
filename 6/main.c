@@ -3,8 +3,8 @@
 
 int main(void)
 {
-        int first = 0,
-            second = 0;
+        int first, second;
+
         read_int("Syötä ensimmäinen kokonaisluku: ", &first);
         read_int("Syötä toinen kokonaisluku: ", &second);
         if (first % second == 0)

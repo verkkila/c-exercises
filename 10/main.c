@@ -3,7 +3,8 @@
 
 int main(void)
 {
-        int score = 0;
+        int score;
+
         read_int("Syötä kokeesta saadut pisteet: ", &score);
         switch (score) {
         case 0:

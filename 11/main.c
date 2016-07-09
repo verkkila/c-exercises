@@ -3,10 +3,11 @@
 
 int main(void)
 {
-        int largest = 0,
-            i = 0;
-        for (; i < 10; ++i) {
-               int num = 0;
+        int largest, i;
+
+        largest = 0;
+        for (i = 0; i < 10; ++i) {
+               int num;
                read_int("Syötä kokonaisluku: ", &num);
                largest = num > largest ? num : largest;
         }

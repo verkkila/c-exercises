@@ -3,7 +3,8 @@
 
 int main(void)
 {
-        int score = 0;
+        int score;
+
         read_int("Kokeen pistemäärä: ", &score);
         if (score >= 0 && score <= 11)
                 printf("Kokeesi on hylätty.\n");

@@ -4,19 +4,17 @@
 
 int main(void)
 {
-        int num = 0,
-            i = 0,
-            j = 0;
-        char num_buf[6] = {0};
+        int num, i, j;
+        char num_string[8];
+
         while (1) {
                 read_int("Syötä viisinumeroinen kokonaisluku: ", &num);
                 if (num > 9999 && num < 100000)
                         break;
         }
-        sprintf(num_buf, "%i", num);
-        j = strlen(num_buf) - 1;
-        for (; i < j; ++i, --j) {
-                if (num_buf[i] != num_buf[j]) {
+        sprintf(num_string, "%i", num);
+        for (i = 0, j = strlen(num_string) - 1; i < j; ++i, --j) {
+                if (num_string[i] != num_string[j]) {
                         printf("%i ei ole palindromi.\n", num);
                         return 0;
                 }

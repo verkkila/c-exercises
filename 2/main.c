@@ -4,7 +4,7 @@ void read_int(const char *prompt, int *val);
 
 int main(void)
 {
-        int wage_per_hour = 0, hours = 0, total_wage = 0;
+        int wage_per_hour, hours, total_wage;
         read_int("Tuntipalkkasi kokonaislukuna: ", &wage_per_hour);
         read_int("Tuntimääräsi kokonaislukuna: ", &hours);
         total_wage = wage_per_hour * hours;
@@ -14,10 +14,9 @@ int main(void)
 
 void read_int(const char *prompt, int *val)
 {
-        char buf[64] = {'\0'};
+        char buf[64];
         do {
-        printf(prompt);
-        fgets(buf, 64, stdin);
+                printf(prompt);
+                fgets(buf, 64, stdin);
         } while (!sscanf(buf, "%i", val));
-        return;
 }
