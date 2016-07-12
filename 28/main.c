@@ -1,34 +1,40 @@
 #include <stdio.h>
 
-int time_to_seconds(const int hours, const int minutes, const int seconds);
-int is_valid_time(const int hours, const int minutes, const int seconds);
+struct timestamp;
+
+int timestamp_to_seconds(const struct timestamp * const t);
+int is_valid_timestamp(const struct timestamp * const t);
+
+struct timestamp {
+        int hours;
+        int minutes;
+        int seconds;
+};
 
 int main(void)
 {
-        int first_hours = -1, first_minutes = -1, first_seconds = -1,
-            second_hours = -1, second_minutes = -1, second_seconds = -1,
-            result = 0;
+        struct timestamp first, second;
+        int result;
+
         do {
-        printf("Anna ensimmäinen aikaleima muodossa (hh:mm:ss): ");
-        scanf("\n%i:%i:%i", &first_hours, &first_minutes, &first_seconds);
-        } while(!is_valid_time(first_hours, first_minutes, first_seconds));
+                printf("Anna ensimmäinen aikaleima muodossa (hh:mm:ss): ");
+                scanf("\n%i:%i:%i", &first.hours, &first.minutes, &first.seconds);
+        } while(!is_valid_timestamp(&first));
         do {
-        printf("Anna toinen aikaleima muodossa (hh:mm:ss): ");
-        scanf("\n%i:%i:%i", &second_hours, &second_minutes, &second_seconds);
-        } while(!is_valid_time(second_hours, second_minutes, second_seconds));
-        result = time_to_seconds(second_hours, second_minutes, second_seconds) - time_to_seconds(first_hours, first_minutes, first_seconds);
+                printf("Anna toinen aikaleima muodossa (hh:mm:ss): ");
+                scanf("\n%i:%i:%i", &second.hours, &second.minutes, &second.seconds);
+        } while(!is_valid_timestamp(&second));
+        result = timestamp_to_seconds(&second) - timestamp_to_seconds(&first);
         printf("Ero aikojen välillä sekunneisa: %i\n", result);
         return 0;
 }
 
-int time_to_seconds(const int hours, const int minutes, const int seconds)
+int timestamp_to_seconds(const struct timestamp * const t)
 {
-        if (hours == 24)
-                return minutes * 60 + seconds;
-        return hours * 3600 + minutes * 60 + seconds * 60;
+        return t->hours * 3600 + t->minutes * 60 + t->seconds;
 }
 
-int is_valid_time(const int hours, const int minutes, const int seconds)
+int is_valid_timestamp(const struct timestamp * const t)
 {
-        return (hours >= 0 && hours <= 24) && (minutes >= 0 && minutes <= 60) && (seconds >= 0 && seconds <= 60);
+        return (t->hours >= 0 && t->hours < 24) && (t->minutes >= 0 && t->minutes < 60) && (t->seconds >= 0 && t->seconds < 60);
 }

@@ -5,7 +5,8 @@
 
 int main(void)
 {
-        int num1 = 0, num2 = 0, answer = 0;
+        int num1, num2, answer;
+
         srand(time(NULL));
         while(1) {
                 printf("Anna luku -1 lopettaaksesi.\n");
@@ -16,7 +17,7 @@ int main(void)
                 if (answer == -1)
                         break;
                 while (answer != num1 * num2) {
-                        read_int("Väärin, yritä uudelleen > ", &answer);
+                        read_int("Väärin, yritä uudelleen: ", &answer);
                 }
                 printf("Oikein!\n\n");
         }

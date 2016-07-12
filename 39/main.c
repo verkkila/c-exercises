@@ -3,11 +3,12 @@
 
 int main(void)
 {
+        int num_count, i;
         int numbers[20] = {0};
         /*Lukujen esiintymismäärä numbers-taulukossa (indeksi = luku)*/
         int numbers_in_array[101] = {0};
-        int num_count = 0,
-            i = 0;
+
+        num_count = 0;
         while (num_count < 20) {
                 read_int("Syötä kokonaisluku väliltä 10-100: ", &numbers[num_count]);
                 if (numbers[num_count] < 10 || numbers[num_count] > 100)

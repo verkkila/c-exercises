@@ -9,8 +9,9 @@ int flip_coin(void);
 
 int main(void)
 {
+        int i;
         int results[2] = {0};
-        int i = 0;
+
         srand(time(NULL));
         for (i = 0; i < 100; ++i) {
                 ++results[flip_coin()];

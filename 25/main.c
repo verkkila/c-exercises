@@ -10,15 +10,15 @@ float pyoristaTuhannesosat(const float luku);
 int main(void)
 {
         while (1) {
-        float num = 0.f;
-        read_float("Syötä reaaliluku (lopeta luvulla -1): ", &num);
-        if (num == -1.f)
-                return 0;
-        printf("%f\t%f\t%f\t%f\t%f\n", num,
-                                       pyoristaKokonaisluvuksi(num),
-                                       pyoristaKymmenesosat(num),
-                                       pyoristaSadasosat(num),
-                                       pyoristaTuhannesosat(num));
+                float num;
+                read_float("Syötä reaaliluku (lopeta luvulla -1): ", &num);
+                if (num == -1.f)
+                        return 0;
+                printf("%f\t%f\t%f\t%f\t%f\n", num,
+                                               pyoristaKokonaisluvuksi(num),
+                                               pyoristaKymmenesosat(num),
+                                               pyoristaSadasosat(num),
+                                               pyoristaTuhannesosat(num));
         }
         return 0;
 }

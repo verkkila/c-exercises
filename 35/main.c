@@ -5,8 +5,10 @@
 
 int main(void)
 {
-        int answer = 0, guess = 0;
-        char again = 'k';
+        int answer, guess;
+        char again;
+
+        again = 'k';
         srand(time(NULL));
         while (again == 'k' || again == 'K') {
                 answer = (rand() % (1000 - 1)) + 1;

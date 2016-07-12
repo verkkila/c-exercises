@@ -12,14 +12,15 @@ int main(void)
 
 void ask_numbers(void)
 {
-        int i = 0;
+        int i;
         float real[5] = {0.f},
               rounded[5] = {0.f};
+
         for (i = 0; i < 5; ++i) {
                 read_float("Syötä reaaliluku: ", &real[i]);
                 rounded[i] = floor(real[i] + 0.5f);
         }
-        printf("Luku\tAlkup.\t\tPyöristetty\n");
+        printf("Luku\tAlkuperäinen\t\tPyöristetty\n");
         for (i = 0; i < 5; ++i) {
                 printf("%i\t%.6f\t\t%.1f\n", i+1, real[i], rounded[i]);
         }

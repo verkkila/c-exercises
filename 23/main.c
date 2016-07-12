@@ -6,9 +6,10 @@ unsigned int factorial(const unsigned int x);
 
 int main(void)
 {
-        float e_approx = 1.f;
-        unsigned int i = 0;
-        for (i = 1; i < NUM_TERMS; ++i) {
+        float e_approx;
+        unsigned int i;
+
+        for (i = 1, e_approx = 1.f; i < NUM_TERMS - 1; ++i) {
                 e_approx += (1.f/factorial(i));
         }
         printf("Neperin luku e %i:n termin tarkkuudella: %f", NUM_TERMS, e_approx);
@@ -17,9 +18,10 @@ int main(void)
 
 unsigned int factorial(const unsigned int x)
 {
-        unsigned int i = 0,
-            result = x;
-        for (i = x - 1; i > 0; --i) {
+        unsigned int i, result;
+        
+        result = i = x;
+        while (--i) {
                 result *= i;
         }
         return result;

@@ -5,8 +5,8 @@ int paivienLukumaaraKuukaudessa(int kk);
 
 int main(void)
 {
-        int month = 0,
-            days = 0;
+        int month, days;
+
         read_int("Anna kuukausi 1-12: ", &month);
         days = paivienLukumaaraKuukaudessa(month);
         if (days == -1)

@@ -23,15 +23,18 @@ const char *grades[11] = {"",
 
 int main(void)
 {
-        int num1 = 0, num2 = 0, answer = 0, q_type = MULT,
-            correct_answers = 0, wrong_answers = 0, grade = 0;
+        int num1, num2, answer, question_type, correct_answers, wrong_answers, grade;
+
+        question_type = MULT;
+        correct_answers = 0;
+        wrong_answers = 0;
         srand(time(NULL));
         while(answer != -1) {
                 printf("Anna luku -1 lopettaaksesi.\n");
                 num1 = (rand() % 9) + 1;
                 num2 = (rand() % 9) + 1;
-                q_type = rand() % 2;
-                switch (q_type) {
+                question_type = rand() % 2;
+                switch (question_type) {
                 case MULT:
                         printf("Paljonko on %i kertaa %i?", num1, num2);
                         read_int(": ", &answer);
@@ -71,7 +74,8 @@ int main(void)
 
 int get_grade(const int correct, const int wrong)
 {
-        float ratio = 0.f;
+        float ratio;
+
         if (wrong == 0)
                 ratio = 1.f;
         else
