@@ -6,8 +6,9 @@ int roll_dice(const int n);
 
 int main(void)
 {
+        int i;
         int sums[13] = {0};
-        int i = 0;
+
         srand(time(NULL));
         for (i = 0; i < 36000; ++i) {
                 ++sums[roll_dice(2)];
@@ -21,7 +22,9 @@ int main(void)
 
 int roll_dice(const int n)
 {
-        int i = 0, sum = 0;
+        int i, sum;
+
+        sum = 0;
         for (i = 0; i < n; ++i) {
                 sum += rand() % 6 + 1;
         }

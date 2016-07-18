@@ -1,20 +1,19 @@
 #include <stdio.h>
 
-/*
- * Nollaa n tavua osoittimesta p alkaen
- * lopusta alkuun päin
- */
-#define ZERO(p, n) __asm__ ("movq %1, %%rcx\n\t" \
-                            "movq %0, %%rbx\n\t" \
+#define ZERO(p, n) __asm__ ("movq %1, %%rcx\n\t" /*n rekisteriin rcx*/ \
+                            "movq %0, %%rbx\n\t" /*p rekisteriin rbx*/ \
                             "1:\n\t" \
-                            "dec %%rcx\n\t" \
-                            "movb $0, (%%rbx,%%rcx)\n\t" \
-                            "cmp $0, %%rcx\n\t" \
-                            "jge 1b\n\t" : : "r"(p), "r"(n) : "%rcx", "%rbx", "cc", "memory");
+                            "dec %%rcx\n\t" /*vähennä rcx:ää yhdellä*/ \
+                            "movb $0, (%%rbx,%%rcx)\n\t" /*rbx[rcx] = 0*/ \
+                            "cmp $0, %%rcx\n\t" /*kokeile, onko rcx 0*/ \
+                            "jge 1b\n\t" /*jos on, siirry kohtaan 1:*/ : : "r"(p), "r"(n) : "%rcx", "%rbx", "cc", "memory");
 
-void memzero(void *p, size_t n);
-
-#define ZERO2(p, n) memzero(p, n)
+#define ZERO2(p, n)     { \
+                                unsigned int i; \
+                                for (i = 0; i < n; ++i) { \
+                                        ((char*)p)[i] = 0; \
+                                } \
+                        }
 
 int main(void)
 {
@@ -32,12 +31,4 @@ int main(void)
         }
         printf("\n");
         return 0;
-}
-
-void memzero(void *p, size_t n)
-{
-        size_t m = 0;
-        while (m < n) {
-                ((unsigned char *)p)[m++] = 0;
-        }
 }

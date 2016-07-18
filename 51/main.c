@@ -8,30 +8,35 @@ int evaluate_drink(const int * const score_array, const size_t n);
 
 int main(void)
 {
+        int drink;
         int scores[NUM_DRINKS][NUM_TASTERS] = {{0}};
         int approved_drinks[NUM_DRINKS] = {0};
-        int i = 0, j = 0;
-        for (i = 0; i < NUM_DRINKS; ++i) {
-                printf("%i. Juoman tulokset:\n", i + 1);
-                for (j = 0; j < NUM_TASTERS;) {
-                        printf("Maistelijan %i arvosana", j + 1);
-                        read_int(": ", &scores[i][j]);
-                        if (scores[i][j] >= 1 && scores[i][j] <= 5)
-                                ++j;
+
+        for (drink = 0; drink < NUM_DRINKS; ++drink) {
+                int taster;
+
+                printf("%i. Juoman tulokset:\n", drink + 1);
+                for (taster = 0; taster < NUM_TASTERS;) {
+                        printf("Maistelijan %i arvosana", taster + 1);
+                        read_int(": ", &scores[drink][taster]);
+                        if (scores[drink][taster] >= 1 && scores[drink][taster] <= 5)
+                                ++taster;
                         else
                                 printf("Arvosanan tulee olla välillä 1-5\n");
                 }
-                approved_drinks[i] = evaluate_drink(scores[i], NUM_TASTERS);
+                approved_drinks[drink] = evaluate_drink(scores[drink], NUM_TASTERS);
         }
-        for (i = 0; i < NUM_DRINKS; ++i) {
-                printf("Juoma %i %s.\n", i + 1, (approved_drinks[i] == 0 ? "hylätään" : "hyväksytään"));
+        for (drink = 0; drink < NUM_DRINKS; ++drink) {
+                printf("Juoma %i %s.\n", drink + 1, (approved_drinks[drink] == 0 ? "hylätään" : "hyväksytään"));
         }
         return 0;
 }
 
 int evaluate_drink(const int * const score_array, const size_t n)
 {
-        unsigned int count_approved = 0, i = 0;
+        unsigned int i, count_approved;
+
+        count_approved = 0;
         for (i = 0; i < n; ++i) {
                 if (score_array[i] >= 3)
                         ++count_approved;

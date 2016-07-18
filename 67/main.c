@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 
 char *strcpy(char *dest, const char *src);
 char *strcat(char *dest, const char *src);
@@ -19,7 +20,9 @@ int main(void)
 
 char *strcpy(char *dest, const char *src)
 {
-        unsigned int i = 0;
+        unsigned int i;
+
+        i = 0;
         do {
                 dest[i] = src[i];
         } while (src[i++]);
@@ -28,14 +31,15 @@ char *strcpy(char *dest, const char *src)
 
 char *strcat(char *dest, const char *src)
 {
-        unsigned int i = 0, j = 0;
+        unsigned int i, j;
+
+        i = 0;
         while (dest[i]) {
                 ++i;
         }
-        do {
+        for (j = 0; src[j]; ++i, ++j) {
                 dest[i] = src[j];
-                ++i;
-                ++j;
-        } while (src[j]);
+        }
+        dest[i + 1] = '\0';
         return dest;
 }

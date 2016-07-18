@@ -7,7 +7,9 @@ int roll_dice(const int n);
 
 int main(void)
 {
-        int money = 10;
+        int money;
+
+        money = 10;
         srand(time(NULL));
         while (1) {
                 int bet = 0, dice = 0;
@@ -44,7 +46,9 @@ roll:
 
 int roll_dice(const int n)
 {
-        int i = 0, sum = 0;
+        int i, sum;
+
+        sum = 0;
         for (i = 0; i < n; ++i) {
                 sum += rand() % 6 + 1;
         }

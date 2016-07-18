@@ -14,8 +14,8 @@ const char *DELIMITER = " ";
 
 int main(void)
 {
+        int i, num_nouns, num_verbs, num_sentences;
         char *nouns[MAX_WORDS] = {0}, *verbs[MAX_WORDS] = {0};
-        int i = 0, num_nouns = 0, num_verbs = 0, num_sentences = 0;
 
         srand(time(NULL));
         num_nouns = read_words("substantiiveja", nouns, MAX_WORDS);
@@ -70,14 +70,16 @@ char to_upper(const char c)
 
 int read_words(const char *type, char **words, const int max)
 {
+        int i;
         char readbuf[512] = {0};
         char *tempword = NULL;
-        int i = 0;
+
         printf("Syötä %s välilyönnillä erotettuna.\n", type);
         fgets(readbuf, 512, stdin);
         readbuf[strlen(readbuf) - 1] = '\0';
         tempword = strtok(readbuf, DELIMITER);
         words[0] = alloc_str(tempword);
+        i = 0;
         while ((tempword = strtok(NULL, DELIMITER)) != NULL) {
                 if (++i >= max - 1)
                         break;
@@ -88,8 +90,10 @@ int read_words(const char *type, char **words, const int max)
 
 char *alloc_str(const char *str)
 {
-        int i = 0;
+        int i;
         char *retstr = malloc(strlen(str) + 1);
+
+        i = 0;
         while (str[i]) {
                 retstr[i] = str[i];
                 ++i;

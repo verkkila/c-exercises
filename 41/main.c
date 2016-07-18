@@ -20,7 +20,8 @@ int main(void)
 
 void fill_array(int * const arr, const int n)
 {
-        int num = 0, i = 0;
+        int i, num;
+
         for (i = 0; i < n;) {
                 read_int("Syötä kokonaisluku väliltä 0-100: ", &num);
                 if (num >= 0 && num <= 100) {
@@ -31,7 +32,8 @@ void fill_array(int * const arr, const int n)
 
 void print_array(int * const arr, const int n)
 {
-        int i = 0;
+        int i;
+
         printf("Syötit:\n");
         for (i = 0; i < n; ++i) {
                 printf("%i ", arr[i]);
@@ -41,7 +43,9 @@ void print_array(int * const arr, const int n)
 
 void print_largest_value(int * const arr, const int n)
 {
-        int largest = 0, largest_idx = 0, i = 0;
+        int largest, largest_idx, i;
+
+        largest = largest_idx = 0;
         for (i = 0; i < n; ++i) {
                 if (arr[i] > largest) {
                         largest = arr[i];
@@ -53,12 +57,14 @@ void print_largest_value(int * const arr, const int n)
 
 void print_average(int * const arr, const int n)
 {
-        float sum = 0;
-        int i = 0;
+        float sum;
+        int i;
+        
+        sum = 0.f;
         for (i = 0; i < n; ++i) {
                 sum += arr[i];
         }
         sum /= n;
-        printf("Taulukon arvojen keskiarvo: %.2f\n", sum);
+        printf("Taulukon lukujen keskiarvo: %.2f\n", sum);
 }
 

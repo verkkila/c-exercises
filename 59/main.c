@@ -8,6 +8,7 @@ int main(void)
 {
         char str1[128] = {0}, str2[128] = {0};
         char *sstr = NULL;
+
         printf("Syötä merkkijono: ");
         fgets(str1, 128, stdin);
         printf("Syötä toinen merkkijono: ");
@@ -20,9 +21,12 @@ int main(void)
 
 char *substr(const char *stra, const char *strb)
 {
-        int i = 0, len = 0;
+        int i;
+        size_t len;
         char buf[128] = {0};
         char *out_str = NULL;
+
+        i = 0;
         while (stra[i] == strb[i]) {
                 buf[i] = stra[i];
                 ++i;
@@ -32,6 +36,5 @@ char *substr(const char *stra, const char *strb)
                 return NULL;
         out_str = malloc(len + 1);
         strncpy(out_str, buf, len);
-        out_str[len] = '\0';
         return out_str;
 }

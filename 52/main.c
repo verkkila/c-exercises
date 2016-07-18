@@ -6,8 +6,11 @@ char to_upper(const char c);
 
 int main(void)
 {
-        char buf[101] = {0}, lower[101] = {0}, upper[101] = {0};
-        int i = 0;
+        int i;
+        char buf[101] = {0}, 
+             lower[101] = {0},
+             upper[101] = {0};
+
         printf("Syötä enintään 100 merkkiä.\n");
         fgets(buf, 101, stdin);
         for (i = 0; i < 101; ++i) {

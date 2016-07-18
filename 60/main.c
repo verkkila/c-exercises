@@ -27,8 +27,10 @@ const char *get_thousands(const int n);
 
 int main(void)
 {
+        int num, i, _1000, _100, _10, _1;
         char buf[32] = {0};
-        int num = 0, i = 0, _1000 = 0, _100 = 0, _10 = 0, _1 = 0;
+
+        i = 0;
         while (1) {
                 printf("Syötä nelinumeroinen kokonaisluku: ");
                 fgets(buf, 32, stdin);

@@ -8,7 +8,6 @@ void read_int(const char *prompt, int *val)
                 printf(prompt);
                 fgets(buf, BUF_SIZE, stdin);
         } while (!sscanf(buf, "%i", val));
-        return;
 }
 
 void read_uint(const char *prompt, unsigned int *val)
@@ -17,8 +16,7 @@ void read_uint(const char *prompt, unsigned int *val)
         do {
                 printf(prompt);
                 fgets(buf, BUF_SIZE, stdin);
-        } while (!sscanf(buf, "%u", val));
-        return;
+        } while (!sscanf(buf, "%ui", val));
 }
 
 void read_float(const char *prompt, float *val)
@@ -28,7 +26,6 @@ void read_float(const char *prompt, float *val)
                 printf(prompt);
                 fgets(buf, BUF_SIZE, stdin);
         } while (!sscanf(buf, "%f", val));
-        return;
 }
 
 void read_double(const char *prompt, double *val)
@@ -38,5 +35,4 @@ void read_double(const char *prompt, double *val)
                 printf(prompt);
                 fgets(buf, BUF_SIZE, stdin);
         } while (!sscanf(buf, "%lf", val));
-        return;
 }

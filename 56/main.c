@@ -22,12 +22,13 @@ int main(void)
 
 int ends_with(const char *str, const char *tok)
 {
-        int i = 0, j = 0;
-        while (*(str + i) != *tok) {
-                if (*(str + i) == '\0')
-                        return 0;
-                i++;
-        }
+        int i, j;
+        size_t str_len, tok_len;
+
+        str_len = strlen(str);
+        tok_len = strlen(tok);
+        i = str_len - tok_len;
+        j = 0;
         while (str[i++] == tok[j++]) {
                 if (str[i] == '\0' && tok[j] == '\0')
                         return 1;

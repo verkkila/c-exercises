@@ -20,9 +20,13 @@ int main(void)
 
 int starts_with(const char *str, const char *tok)
 {
-        while (*tok++ == *str++) {
-                if (*tok == '\0')
-                        return 1;
+        unsigned int i;
+
+        i = 0;
+        while (tok[i] == str[i]) {
+                ++i;
         }
+        if (tok[i] == '\0')
+                return 1;
         return 0;
 }

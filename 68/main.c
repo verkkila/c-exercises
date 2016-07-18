@@ -4,11 +4,12 @@
 
 int main(void)
 {
-        unsigned int array_size = 0, i = 0;
-        double *number_array = NULL;
+        unsigned int array_size, i;
+        double *number_array;
+
         read_uint("Syötä taulukon koko: ", &array_size);
-        number_array = malloc(array_size * sizeof(double));
-        if (!number_array)
+        number_array = malloc(array_size * sizeof(float));
+        if (number_array == NULL)
                 return 1;
         for (i = 0; i < array_size; ++i) {
                 printf("(%i) ", i + 1);

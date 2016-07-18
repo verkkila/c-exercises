@@ -18,16 +18,16 @@ int point_inside_circle(const point * const p);
 
 int main(void)
 {
-        int i = 0, point_count = 0, area_circle = 0, area_rect = 0;
-        float pi_approx = 0.f, ratio = 0.f;
+        int i, point_count, area_circle, area_rect;
+        float pi_approx, ratio;
         point *points = NULL;
+
+        area_circle = area_rect = 0;
         srand(time(NULL));
         read_int("Anna pisteiden lukumäärä: ", &point_count);
         points = malloc(sizeof(point) * point_count);
         for (i = 0; i < point_count; ++i) {
-                point temp;
-                generate_point(&temp, -1.f, 1.f);
-                points[i] = temp;
+                generate_point(&points[i], -1.f, 1.f);
         }
         for (i = 0; i < point_count; ++i) {
                 if (point_inside_rect(&points[i]))

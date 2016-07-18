@@ -2,12 +2,14 @@
 
 int main(void)
 {
+        int i;
         int numbers[1000] = {0};
-        int i = 0, j = 0;
+
         for (i = 2; i < 1000; ++i) {
                 numbers[i] = 1;
         }
         for (i = 2; i < 500; ++i) {
+                int j;
                 for (j = i*2; j < 1000; j += i) {
                        numbers[j] = 0;
                 }

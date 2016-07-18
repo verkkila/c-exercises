@@ -4,8 +4,10 @@
 
 int main(void)
 {
-        int luku = 5;
-        int tulos = 0;
+        int luku, tulos;
+
+        luku = 5;
+        tulos = 0;
         tulos = TUPLAA(luku++);
         /* ((5++) + (5++))
          * tulos = 6 + 5++
