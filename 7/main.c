@@ -18,5 +18,6 @@ int main(void)
         for (i = 0; number[i]; ++i) {
                 printf("%c ", number[i]);
         }
+        printf("\n");
         return 0;
 }

@@ -9,14 +9,16 @@ int SUM = 0;
 
 int main(void)
 {
-        int random_values[25] = {0};
-        int i = 0;
-        struct linked_list random_ints = {0, NULL, NULL};
+        struct linked_list random_ints;
+        int i;
+
         srand(time(NULL));
         list_new(&random_ints, sizeof(int), add_to_sum);
         for (i = 0; i < 25; ++i) {
-                random_values[i] = rand() % 101;
-                list_add_node(&random_ints, &random_values[i]);
+                int random_number;
+
+                random_number = rand() % 101;
+                list_add_node(&random_ints, &random_number);
         }
         list_iterate(&random_ints);
         list_free(&random_ints);

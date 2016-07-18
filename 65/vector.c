@@ -19,7 +19,7 @@ void vector_init(vector *this, size_t element_size)
 void *vector_get(vector *this, size_t index)
 {
         if (index >= this->max_size) {
-                printf("Index out of range, (index %ul, max size %ul)\n", index, this->max_size);
+                printf("Index out of range, (index %lu, max size %lu)\n", index, this->max_size);
                 return NULL;
         }
         return (void *)((byte *)this->data + (this->unit_size * index));
@@ -27,7 +27,7 @@ void *vector_get(vector *this, size_t index)
 
 static void vector_realloc(vector *this)
 {
-        this->data = realloc(this->data, this->max_size);
+        this->data = realloc(this->data, this->max_size * this->unit_size);
 }
 
 void vector_push_back(vector *this, void *p_data)

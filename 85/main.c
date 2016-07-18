@@ -2,17 +2,19 @@
 
 int main(void)
 {
-        FILE *namesfile = NULL;
-        char c = 0;
-        namesfile = fopen("names.txt", "r");
-        if (!namesfile)
-                return 0;
-        while ((c = getc(namesfile)) != EOF) {
+        FILE *names;
+        char c;
+
+
+        names = fopen("names.txt", "r");
+        if (names == NULL)
+                return 1;
+        while ((c = getc(names)) != EOF) {
                 if (c == ';')
                         putchar(' ');
                 else
                         putchar(c);
         }
-        fclose(namesfile);
+        fclose(names);
         return 0;
 }

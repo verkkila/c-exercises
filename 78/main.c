@@ -21,10 +21,12 @@ void free_list(struct entry *root);
 
 int main(void)
 {
-        struct entry *root = NULL;
+        struct entry *root;
+
+        root = NULL;
         while (1) {
+                char c, action;
                 char input_buffer[32] = {0};
-                char c = 0, action = 0;
                 printf("Valitse toiminto:\n"
                        "1. Syötä tietoja\n"
                        "2. Etsi nimellä\n"
@@ -72,14 +74,12 @@ void read_string(char *str, size_t len)
 {
         fgets(str, len, stdin);
         str[strlen(str) - 1] = '\0';
-        return;
 }
 
 void continue_prompt(void)
 {
         printf("Paina Enter jatkaaksesi.\n");
         getchar();
-        return;
 }
 
 void input_entries(struct entry **root)
@@ -103,12 +103,17 @@ void input_entries(struct entry **root)
                 iter->next = create_entry();
                 iter = iter->next;
         }
-        return;
 }
 
 struct entry *create_entry(void)
 {
-        struct entry *temp = malloc(sizeof(struct entry));
+        struct entry *temp;
+        
+        temp = malloc(sizeof(struct entry));
+        if (temp == NULL) {
+                printf("Uuden tiedon lisääminen epäonnistui.\n");
+                return NULL;
+        }
         printf("Syötä nimi: ");
         read_string(temp->name, 32);
         printf("Syötä osoite: ");
@@ -121,7 +126,9 @@ struct entry *create_entry(void)
 
 int remove_entry(struct entry **root_ptr, char *tname)
 {
-        struct entry **iter = root_ptr;
+        struct entry **iter;
+
+        iter = root_ptr;
         while (*iter) {
                 if (!strcmp((*iter)->name, tname)) {
                         struct entry *prev = *iter;
@@ -137,9 +144,11 @@ int remove_entry(struct entry **root_ptr, char *tname)
 
 int find(struct entry * const root, char *tname)
 {
-        int count_found = 0;
-        struct entry *iter = NULL;
+        int count_found;
+        struct entry *iter;
         iter = root;
+        
+        count_found = 0;
         while (iter) {
                 if (!strcmp(iter->name, tname)) {
                         print_entry(iter);
@@ -153,12 +162,12 @@ int find(struct entry * const root, char *tname)
 
 void print_all_entries(struct entry * const root)
 {
-        struct entry *iter = NULL;
+        struct entry *iter;
+
         for (iter = root; iter; iter = iter->next) {
                 print_entry(iter);
                 printf("\n");
         }
-        return;
 }
 
 void print_entry(struct entry *p_entry)
@@ -166,17 +175,16 @@ void print_entry(struct entry *p_entry)
         printf("Nimi: %s\n", p_entry->name);
         printf("Osoite: %s\n", p_entry->address);
         printf("Puhelinnumero: %s\n", p_entry->phonenum);
-        return;
 }
 
 void free_list(struct entry *root)
 {
-        struct entry *iter = root;
+        struct entry *iter;
+
+        iter = root;
         while (iter) {
                 struct entry *prev = iter;
                 iter = iter->next;
                 free(prev);
         }
-        root = NULL;
-        return;
 }

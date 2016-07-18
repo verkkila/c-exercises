@@ -17,13 +17,15 @@ int main(void)
         do {
                 printf("Anna päiväys muodossa pp-kk-vvvv: ");
                 scanf("%i-%i-%i", &first.tm_mday, &first.tm_mon, &first.tm_year);
+                --first.tm_mon;
         } while(!is_valid_timestamp(&first));
         do {
                 printf("Anna toinen päiväys muodossa pp-kk-vvvv: ");
                 scanf("%i-%i-%i", &second.tm_mday, &second.tm_mon, &second.tm_year);
+                --second.tm_mon;
         } while(!is_valid_timestamp(&second));
         diffseconds = difftime(mktime(&second), mktime(&first));
-        printf("Päiviä: %i", abs(diffseconds/SECONDS_IN_A_DAY));
+        printf("Päiviä: %i\n", abs(diffseconds/SECONDS_IN_A_DAY));
         return 0;
 }
 

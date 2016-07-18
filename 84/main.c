@@ -9,38 +9,40 @@ int eval(const int a, const char e, const int b);
 int search_highest_expr(const char *buf, char *expr);
 void remove_whitespace(char *str);
 
-char OPERATORS[] = {'*', '/', '+', '-', '^', '^'};
+char OPERATORS[] = {'^', '^', '*', '/', '+', '-'};
 
 int main(int argc, char **argv)
 {
+        int i, expr_start, has_run_once;
         char exprbuf[256] = {0};
         char original_expr[256] = {0};
         char curexpr[32] = {0};
-        int i = 1, res = 0, exprstart = 0, has_run_once = 0;
+
         for (i = 1; i < argc; ++i) {
                 strcat(exprbuf, argv[i]);
-                strcpy(original_expr, exprbuf);
         }
-        /*Search for the expression with the highest precedence*/
-        while ((exprstart = search_highest_expr(exprbuf, curexpr)) != -1) {
-                int lhs = 0, rhs = 0, nullidx = 0;
-                char op = 0;
-                /*Parse an expression into the left-hand value, operator and the right-hand value*/
+        strcpy(original_expr, exprbuf);
+
+        has_run_once = 0;
+        while ((expr_start = search_highest_expr(exprbuf, curexpr)) != -1) {
+                int lhs, rhs, nullidx, res;
+                char op;
                 parse_expr(curexpr, &lhs, &op, &rhs);
-                /*Evaluate the expression*/
                 res = eval(lhs, op, rhs);
-                /*Replace the expression with whitespace*/
-                memset(&exprbuf[exprstart], ' ', strlen(curexpr));
-                /*Print the result of the evaluated expression into the expression buffer, store the index of the null terminator*/
-                nullidx = sprintf(&exprbuf[exprstart], "%i", res);
-                /*Replace null terminator with whitespace*/
-                exprbuf[exprstart + nullidx] = ' ';
+                /*Poistetaan ratkaistu lauseke kirjoittamalla sen päälle välilyöntejä*/
+                memset(&exprbuf[expr_start], ' ', strlen(curexpr));
+                /*Kirjoitetaan lausekkeen tilalle ratkaisu*/
+                nullidx = sprintf(&exprbuf[expr_start], "%i", res);
+                /*Poistetaan sprintf:n lisäämä '\0'*/
+                exprbuf[expr_start + nullidx] = ' ';
+                /*Poistetaan myös turhat välilyönnit*/
                 remove_whitespace(exprbuf);
                 memset(curexpr, 0, 32);
                 has_run_once = 1;
         }
         if (!has_run_once) {
-                printf("Anna laskutehtävä komentoriviargumentteina, esim: ./main 2\\*8+10 (huom. \\*)\n");
+                printf("Anna laskutehtävä komentoriviargumentteina, esim: ./main 2^5+10\n"
+                       "Tuetut laskutoimitukset ovat: ^, *, /, +, -\n");
         } else {
                 printf("%s = %s\n", original_expr, exprbuf);
         }
@@ -66,7 +68,9 @@ int eval(const int a, const char e, const int b)
 
 int parse_expr(const char *expr, int *a, char *e, int *b)
 {
-        int i = 0;
+        int i;
+
+        i = 0;
         *a = atoi(expr);
         while (isdigit(expr[i])) {
                 ++i;
@@ -78,36 +82,40 @@ int parse_expr(const char *expr, int *a, char *e, int *b)
 
 int search_highest_expr(const char *buf, char *expr)
 {
-        int char_index = 0, op_index = 0;
-        char current_op = 0;
+        int char_index, op_index;
+        char current_op;
+        
+        op_index = char_index = 0;
         while (1) {
-                /*Search the expression for operators*/
+                /*Etsitään lausekkeesta laskutoimitus*/
                 while ((current_op = buf[char_index]) != 0) {
-                        int start = 0, end = 0;
+                        int start, end;
+
                         if (current_op == OPERATORS[op_index] || current_op == OPERATORS[op_index+1]) {
-                                int temp = 0, k = 0;
+                                int temp, k;
+
+                                k = 0;
                                 start = char_index;
                                 end = char_index;
-                                /*Find the beginning of the expression*/
+                                /*Etsitään lausekkeen alku...*/
                                 while (isdigit(buf[start-1]))
                                         --start;
                                 temp = start;
-                                /*Find the end*/
+                                /*...ja loppu*/
                                 while (isdigit(buf[end+1]))
                                         ++end;
-                                /*Copy expression from buf to expr*/
+                                /*Kopioidaan lausete parametriin expr*/
                                 while (temp <= end) {
                                         expr[k] = buf[temp];
                                         ++k;
                                         ++temp;
                                 }
-                                /*Return -1 if operator is surrounded by non-digits*/
+                                /*Jos laskutoimituksen ympärillä ei ole numeroita, palautetaan -1*/
                                 return (start != char_index && end != char_index) ? start : -1;
 
                         }            
                         ++char_index;
                 }
-                /*Reset char_index to the beginning of the expression, move op_index to next set of operators*/
                 char_index = 0;
                 op_index += 2;
                 if (op_index > 5)
@@ -118,8 +126,9 @@ int search_highest_expr(const char *buf, char *expr)
 
 void remove_whitespace(char *str)
 {
-        char *i = str;
-        char *j = str;
+        char *i, *j;
+
+        i = j = str;
         while (*j != 0) {
                 *i = *j++;
                 if (*i != ' ')

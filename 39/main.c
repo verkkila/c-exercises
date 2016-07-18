@@ -16,6 +16,7 @@ int main(void)
                 ++numbers_in_array[numbers[num_count]];
                 ++num_count;
         }
+        printf("Kerran esiintyneet luvut:\n");
         for (i = 0; i < 20; ++i) {
                 if (numbers_in_array[numbers[i]] == 1) {
                         printf("%i ", numbers[i]);               

@@ -13,11 +13,14 @@ struct point *create_point(const int x, const int y);
 
 int main(void)
 {
-        int root_set = 0;
-        float dist_all = 0.f, dist_f_to_l = 0.f;
-        struct point *root = NULL;
-        struct point *iter = NULL;
+        int root_set;
+        float dist_all, dist_first_to_last;
+        struct point *root, *iter;
         char buf[32] = {0};
+
+        root_set = 0;
+        root = iter = NULL;
+        dist_all = dist_first_to_last = 0.f;
         while (1) {
                 int tempx = 0, tempy = 0;
                 printf("Syötä koordinaatit välilyönnillä erotettuna, lopeta kirjaimella: ");
@@ -33,12 +36,19 @@ int main(void)
                                 iter = iter->next;
                         }
                 } else {
-                        dist_f_to_l = dist2d(root->x, iter->x, root->y, iter->y);
+                        dist_first_to_last = dist2d(root->x, iter->x, root->y, iter->y);
                         break;
                 }
         }
-        printf("Kokonaispituus: %.3f, linnuntie ensimmäisestä viimeiseen: %.3f\n", dist_all, dist_f_to_l);
-        free(root);
+        printf("Kokonaispituus: %.3f, linnuntie ensimmäisestä viimeiseen: %.3f\n", dist_all, dist_first_to_last);
+        iter = root;
+        while (iter) {
+                struct point *prev;
+                prev = iter;
+                iter = iter->next;
+                free(prev);
+        }
+        iter = NULL;
         return 0;
 }
 

@@ -16,6 +16,6 @@ int main(void)
                 sum += val;
                 n++;
         } while(val >= 0.f);
-        printf("Lukujen keskiarvo: %.2f", (sum / n));
+        printf("Lukujen keskiarvo: %.2f\n", (sum / n));
         return 0;
 }

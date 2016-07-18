@@ -13,6 +13,6 @@ int main(void)
                         ++n;
                 }
         }
-        printf("Lukujen keskiarvo: %.2f", (sum / n));
+        printf("Lukujen keskiarvo: %.2f\n", (sum / n));
         return 0;
 }

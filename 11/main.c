@@ -11,6 +11,6 @@ int main(void)
                read_int("Syötä kokonaisluku: ", &num);
                largest = num > largest ? num : largest;
         }
-        printf("Suurin luku oli: %i", largest);
+        printf("Suurin luku oli: %i\n", largest);
         return 0;
 }
