@@ -1,2 +1,1 @@
-# c-exercises
-For course 811122P Introduction to Programming
+# Small exercises in the C language
